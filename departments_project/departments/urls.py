@@ -1,0 +1,9 @@
+from django.urls import path
+from . import views
+
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('profile/<str:ime>/', views.profile, name='profile-data'),
+    path('register/', views.test_form, name='register'),
+]
