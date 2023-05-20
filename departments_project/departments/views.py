@@ -37,7 +37,7 @@ def test_form(request):
         # Зарежда празна форма
         form = ModelTestForm()
     else:  # if request.method == 'POST':
-        # Зарежда
+        # Зарежда форма със полета от зададен модел във Meta класа във forms.py
         form = ModelTestForm(request.POST)
         # проверява дали въведените данни във формата са валидни
         if form.is_valid():
