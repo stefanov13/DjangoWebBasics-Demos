@@ -6,7 +6,7 @@ from .forms import TestForm, ModelTestForm
 
 
 def index(request):
-    # Взема всички обекти от базата
+    # Вземаме всички обекти от базата
     users = Person.objects.all()
 
     context = {
