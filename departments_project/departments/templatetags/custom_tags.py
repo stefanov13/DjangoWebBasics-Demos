@@ -18,8 +18,12 @@ def add_classes(value, args):
     # classes += new_classes
     # classes = set(classes)
 
-    value.field.widget.attrs['class'] = ' '.join(classes)
-    return value
+    # One way
+    # value.field.widget.attrs['class'] = ' '.join(classes)
+    # return value
+
+    # Second way
+    return value.as_widget(attrs={'class': ' '.join(classes)})
 
 
 @register.simple_tag
