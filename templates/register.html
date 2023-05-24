@@ -1,20 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% load custom_classes %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
 
-<body>
+{% block title %}
+    Register
+{% endblock %}
 
-  <form action="{% url 'register' %}" method="post">
-    {{ form.as_div }}
-    <button>Send</button>
-    {% csrf_token %}
-  </form>
-</body>
-
-</html>
+{% block content %}
+    <form action="{% url 'register' %}" method="post">
+        {% for field in form %}
+            <div>
+                {{ field.label }}
+                {{ field|add_class:'form-control mb-5 w-50' }}
+            </div>
+        {% endfor %}
+{#        {{ form|add_class:'form-control mb-5 w-50' }}#}
+        <button>Send</button>
+        {% csrf_token %}
+    </form>
+{% endblock %}

@@ -1,19 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
+{% block title %}
+    Index
+{% endblock %}
 
-<body>
-  {% for user in users %}
-  <h1>Link to <a href="{% url 'profile-data' ime=user.first_name %}">{{ user.first_name }}'s profile</a></h1>
-  {% endfor %}
-  <h1>Link to <a href="{% url 'profile-data' ime=404 %}">404's profile</a></h1>
+{% block content %}
+    {% for user in users %}
+        <h1>Link to <a href="{% url 'profile-data' name=user.first_name pk=user.pk %}">{{ user.first_name }}'s
+            profile</a> - {{ date|date:'d / M / Y' }}</h1>
+    {% endfor %}
+{% endblock %}
 
-</body>
-
-</html>
+{% block errors %}
+    <h1>Link to <a href="{% url 'profile-data' name=404 pk=1 %}">404's profile</a></h1>
+{% endblock %}

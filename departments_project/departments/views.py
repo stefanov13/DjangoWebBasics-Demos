@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, render, redirect
+from django.utils import timezone
 
 
 from .models import Person
@@ -10,16 +11,16 @@ def index(request):
     users = Person.objects.all()
 
     context = {
-        'users': users
+        'users': users,
+        'date': timezone.now()
     }
 
     return render(request, 'index.html', context)
 
 
-def profile(request, ime):
+def profile(request, name, pk):
     # Взема определен потребител по първо име (поле в базата)
-    user = Person.objects.filter(first_name=ime).get()
-
+    user = Person.objects.filter(first_name=name).filter(pk=pk).get()
     # user = get_object_or_404(Person, first_name=ime)
 
     context = {
