@@ -50,11 +50,10 @@ def test_form(request):
 
             # Създаваме нов обект в базата
             # Person.objects.create(first_name=first_name, last_name=last_name, age=age)
-
             form.save()
 
             # redirect with named url / view
-            return redirect('profile-data', form.cleaned_data['first_name'])
+            return redirect('index')
 
             # redirect with absolute url
             # return redirect(f'127.0.0.1/departments/profile{form.cleaned_data.get("first_name")}')
