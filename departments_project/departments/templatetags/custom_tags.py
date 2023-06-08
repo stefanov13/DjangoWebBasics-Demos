@@ -3,7 +3,7 @@ from django import template
 register = template.Library()
 
 
-@register.filter(name='add_class')
+@register.filter
 def add_classes(value, args):
     classes = value.field.widget.attrs.get('class', '')
 

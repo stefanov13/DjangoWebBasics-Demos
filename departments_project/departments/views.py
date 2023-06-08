@@ -1,15 +1,13 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.utils import timezone
 
-
 from .models import Person
 from .forms import TestForm, ModelTestForm
 
 
 def index(request):
     # Взема всички обекти от таблицата person в базата
-    users = Person.objects.all()
-
+    users = Person.objects.filter(age=20)
     context = {
         'users': users,
         'date': timezone.now()
@@ -34,6 +32,7 @@ def profile(request, name, pk):
 
 
 def test_form(request):
+
     if request.method == 'GET':
         # Зарежда празна форма
         form = ModelTestForm()
@@ -42,7 +41,6 @@ def test_form(request):
         form = ModelTestForm(request.POST)
         # проверява дали въведените данни във формата са валидни
         if form.is_valid():
-
             # Ако формата не е ModelForm, а е само Form
             # Вземаме висчки нужни полета от формата
 

@@ -13,6 +13,10 @@
     <h1>Age: {{ user.age }}</h1>
     {#    with custom template tag #}
     <h1>Location: {% mute user.city|capfirst %} </h1>
+
+    <hr>
+
+    <a href="{% url 'register' %}">Register</a>
 {% endblock %}
 }
 {% block errors %}
