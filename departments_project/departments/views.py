@@ -7,7 +7,7 @@ from .forms import TestForm, ModelTestForm
 
 def index(request):
     # Взема всички обекти от таблицата person в базата
-    users = Person.objects.filter(age=20)
+    users = Person.objects.all()
     context = {
         'users': users,
         'date': timezone.now()
@@ -40,6 +40,7 @@ def test_form(request):
         # Зарежда форма със полета от зададен модел във Meta класа във forms.py
         form = ModelTestForm(request.POST)
         # проверява дали въведените данни във формата са валидни
+        print()
         if form.is_valid():
             # Ако формата не е ModelForm, а е само Form
             # Вземаме висчки нужни полета от формата
@@ -67,3 +68,37 @@ def test_form(request):
     }
 
     return render(request, 'register.html', data)
+
+
+def person_pets(request):
+    persons = Person.objects.filter(first_name='Test').get()
+    persons.pets.all()
+    # persons_dict = {person: person.pets.all() for person in persons}
+
+    # for person in persons_dict:
+    #     print(f'{person.first_name}: {", ".join(pet.name for pet in persons_dict[person])}')
+
+    context = {
+        'persons': persons,
+        'person_pets': persons_dict
+    }
+
+    return render(request, 'pets.html', context)
+
+
+def edit(request):
+    person = Person.objects.filter(pk=1).get()
+    if request.method == 'GET':
+        form = TestForm(initial=person.__dict__)
+    else:
+        form = TestForm(request.POST, initial=person.__dict__)
+        if form.is_valid():
+            data = form.cleaned_data
+            p = Person(**data)
+            p.save()
+            return redirect('index')
+
+    context = {
+        'form': form
+    }
+    return render(request, 'edit.html', context)
