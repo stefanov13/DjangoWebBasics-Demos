@@ -23,6 +23,7 @@ app/templatetags/file.py
 
 {% load file %}  # зареждане на файла с custom филтрите и тагове
 
+from django import template # импортване при създаване на къстъм темплейти във файла на темплейтите.
 # file.py:
 # @register.simple_tag
 # def test_tag():
